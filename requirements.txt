@@ -1,0 +1,2 @@
+Pygments>=1.5
+git+https://github.com/flowroute/jsonrpc-ns.git
