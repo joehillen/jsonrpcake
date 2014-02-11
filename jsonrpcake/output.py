@@ -11,7 +11,6 @@ from pygments.formatters.terminal import TerminalFormatter
 from pygments.formatters.terminal256 import Terminal256Formatter
 from pygments.util import ClassNotFound
 
-from .compat import is_windows
 from .solarized import Solarized256Style
 from .models import Environment
 
@@ -23,7 +22,7 @@ DEFAULT_INDENT = 4
 # great and fruity seems to give the best result there.
 AVAILABLE_STYLES = set(STYLE_MAP.keys())
 AVAILABLE_STYLES.add('solarized')
-DEFAULT_STYLE = 'solarized' if not is_windows else 'fruity'
+DEFAULT_STYLE = 'solarized'
 
 
 BINARY_SUPPRESSED_NOTICE = (
@@ -182,7 +181,7 @@ class PygmentsProcessor(BaseProcessor):
         except ClassNotFound:
             style = Solarized256Style
 
-        if self.env.is_windows or self.env.colors == 256:
+        if self.env.colors == 256:
             fmt_class = Terminal256Formatter
         else:
             fmt_class = TerminalFormatter

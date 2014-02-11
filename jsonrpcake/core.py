@@ -16,7 +16,6 @@ import json
 
 import jsonrpc_ns
 
-from .compat import str, is_py3
 from .models import Environment
 from .output import build_output_stream, write, write_with_colors_win_py3
 from . import ExitStatus
@@ -69,11 +68,7 @@ def main(args=sys.argv[1:], env=Environment()):
         }
 
         try:
-
-            if env.is_windows and is_py3 and 'colors' in args.prettify:
-                write_with_colors_win_py3(**write_kwargs)
-            else:
-                write(**write_kwargs)
+            write(**write_kwargs)
 
         except IOError as e:
             if not traceback and e.errno == errno.EPIPE:

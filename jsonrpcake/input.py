@@ -16,9 +16,6 @@ except ImportError:
 
 # TODO: Use MultiDict for headers once added to `requests`.
 # https://github.com/jkbr/httpie/issues/130
-from requests.structures import CaseInsensitiveDict
-
-from .compat import str
 
 
 # Various separators used in args
@@ -210,8 +207,6 @@ class Parser(ArgumentParser):
         if self.args.prettify == PRETTY_STDOUT_TTY_ONLY:
             self.args.prettify = PRETTY_MAP[
                 'all' if self.env.stdout_isatty else 'none']
-        elif self.args.prettify and self.env.is_windows:
-            self.error('Only terminal output can be colorized on Windows.')
         else:
             # noinspection PyTypeChecker
             self.args.prettify = PRETTY_MAP[self.args.prettify]
@@ -396,8 +391,6 @@ def parse_items(items, data=None, headers=None, files=None, params=None):
     and `params`.
 
     """
-    if headers is None:
-        headers = CaseInsensitiveDict()
     if data is None:
         data = OrderedDict()
     if files is None:

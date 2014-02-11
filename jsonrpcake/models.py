@@ -1,8 +1,6 @@
 import os
 import sys
 
-from .compat import is_windows
-
 
 class Environment(object):
     """Holds information about the execution context.
@@ -11,8 +9,6 @@ class Environment(object):
     and allows for mocking.
 
     """
-
-    is_windows = is_windows
 
     progname = os.path.basename(sys.argv[0])
     if progname != 'jsonrpc':
@@ -26,16 +22,8 @@ class Environment(object):
 
     stdout_isatty = sys.stdout.isatty()
     stderr_isatty = sys.stderr.isatty()
-    if is_windows:
-        # noinspection PyUnresolvedReferences
-        from colorama.initialise import wrap_stream
-        stdout = wrap_stream(sys.stdout, convert=None,
-                             strip=None, autoreset=True, wrap=True)
-        stderr = wrap_stream(sys.stderr, convert=None,
-                             strip=None, autoreset=True, wrap=True)
-    else:
-        stdout = sys.stdout
-        stderr = sys.stderr
+    stdout = sys.stdout
+    stderr = sys.stderr
 
     def __init__(self, **kwargs):
         assert all(hasattr(type(self), attr)
