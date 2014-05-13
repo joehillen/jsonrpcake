@@ -5,7 +5,7 @@ import jsonrpcake
 
 
 requirements = [
-    'jsonrpc-ns',
+    'jsonrpc-ns>=0.5',
     'Pygments>=1.5'
 ]
 try:
@@ -26,7 +26,7 @@ def long_description():
 
 setup(
     name='jsonrpcake',
-    version='1.0.0',
+    version='1.1.0',
     description=jsonrpcake.__doc__.strip(),
     long_description=long_description(),
     author='Joe Hillenbrand',

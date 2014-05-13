@@ -17,7 +17,7 @@ import json
 import jsonrpc_ns
 
 from .models import Environment
-from .output import build_output_stream, write, write_with_colors_win_py3
+from .output import build_output_stream, write
 from . import ExitStatus
 
 
@@ -32,8 +32,8 @@ def main(args=sys.argv[1:], env=Environment()):
     def error(msg, *args, **kwargs):
         msg = msg % args
         level = kwargs.get('level', 'error')
-        env.stderr.write('\njsonrpc: {level}: {msg}\n'.format(level=level,
-                                                              msg=msg))
+        env.stderr.write('\njsonrpc: {level}: {msg}\n'
+                         .format(level=level, msg=msg))
 
     debug = '--debug' in args
     traceback = debug or '--traceback' in args
@@ -46,7 +46,8 @@ def main(args=sys.argv[1:], env=Environment()):
     try:
         args = parser.parse_args(args=args, env=env)
         try:
-            response = jsonrpc_ns.request(args.addr, args.method, args.data)
+            response = jsonrpc_ns.request(
+                args.addr, args.method, args.data, timeout=args.timeout)
         except jsonrpc_ns.JSONRPCResponseError as e:
             response = e.value
             code = e.value['code']

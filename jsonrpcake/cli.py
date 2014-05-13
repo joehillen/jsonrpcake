@@ -188,11 +188,11 @@ network = parser.add_argument_group(title='Network')
 network.add_argument(
     '--timeout',
     type=float,
-    default=30,
+    default=4,
     metavar='SECONDS',
     help="""
     The connection timeout of the request in seconds. The default value is
-    30 seconds.
+    4 seconds.
 
     """
 )
