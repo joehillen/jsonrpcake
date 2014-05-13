@@ -31,6 +31,7 @@ setup(
     long_description=long_description(),
     author='Joe Hillenbrand',
     author_email='joehillen@gmail.com',
+    url='http://github.com/joehillen/jsonrpcake',
     license=jsonrpcake.__licence__,
     packages=['jsonrpcake'],
     entry_points={
